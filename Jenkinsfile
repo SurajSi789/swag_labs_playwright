@@ -2,7 +2,7 @@
 // Jenkins CI/CD pipeline — Swag Labs Playwright BDD framework
 // -----------------------------------------------------------------------------
 // Required Jenkins plugins / global tools (configure once under "Manage Jenkins"):
-//   • NodeJS plugin              → tool name  : 'NodeJS-20'
+//   • NodeJS plugin              → tool name  : 'NodeJS 24' (match your instance)
 //   • SonarQube Scanner plugin   → server name : 'SonarQube'  , tool : 'SonarScanner'
 //   • Allure plugin              → tool name  : 'Allure'
 // Optional credentials:
@@ -13,7 +13,8 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'NodeJS-20'
+    // Must match a NodeJS installation configured in Manage Jenkins → Tools.
+    nodejs 'NodeJS 24'
   }
 
   parameters {
