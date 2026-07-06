@@ -7,8 +7,7 @@ const RegisterPage = require('../pages/RegisterPage');
 /**
  * Custom test-scoped fixtures layered on top of Playwright + playwright-bdd.
  * Each page object is exposed as a fixture so step definitions can request
- * exactly the pages they need. `world` is a per-scenario scratch bag for
- * passing values between steps (e.g. a generated email).
+ * exactly the pages they need.
  *
  * The explicit `@typedef` + cast below are required: in plain JS, Playwright's
  * self-referential fixture argument prevents `base.extend` from inferring these
@@ -21,7 +20,6 @@ const RegisterPage = require('../pages/RegisterPage');
  * @property {InstanceType<typeof HomePage>} homePage
  * @property {InstanceType<typeof LoginPage>} loginPage
  * @property {InstanceType<typeof RegisterPage>} registerPage
- * @property {Record<string, any>} world
  */
 
 const test = base.extend(
@@ -44,10 +42,6 @@ const test = base.extend(
     },
     registerPage: async ({ page }, use) => {
       await use(new RegisterPage(page));
-    },
-    // Per-scenario shared state.
-    world: async ({}, use) => {
-      await use(/** @type {Record<string, any>} */ ({}));
     },
   })
 );

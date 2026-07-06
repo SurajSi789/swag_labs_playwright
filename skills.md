@@ -51,9 +51,8 @@ feature (.feature)  ──bddgen──►  tests/<area>/*.spec.js  ──►  Pl
 ```
 
 - **Fixtures** (`src/fixtures/fixtures.js`) are the single source of `Given/When/Then`
-  and expose page objects (`homePage`, `loginPage`, `registerPage`) + a per-scenario
-  `world` bag. **Every step file and hook file must import from this module**, or
-  they won't share fixtures.
+  and expose page objects (`homePage`, `loginPage`, `registerPage`). **Every step
+  file and hook file must import from this module**, or they won't share fixtures.
 - **Hooks** (`src/steps/hooks.js`) call `reporter.flush()` in `AfterAll` so the
   healing report is written once per worker.
 
