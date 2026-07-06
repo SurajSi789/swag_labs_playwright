@@ -1,0 +1,46 @@
+{
+  "name": "swag-labs-playwright",
+  "version": "1.0.0",
+  "description": "Professional Playwright JS + BDD framework with AI self-healing locators for sauce-demo.myshopify.com (Login, Signup, Home).",
+  "type": "commonjs",
+  "scripts": {
+    "bddgen": "bddgen",
+    "pretest": "bddgen",
+    "test": "playwright test",
+    "test:headed": "bddgen && playwright test --headed",
+    "test:login": "bddgen && playwright test --grep @login",
+    "test:signup": "bddgen && playwright test --grep @signup",
+    "test:home": "bddgen && playwright test --grep @home",
+    "test:smoke": "bddgen && playwright test --grep @smoke",
+    "test:sanity": "bddgen && playwright test --grep @sanity",
+    "test:regression": "bddgen && playwright test --grep @regression",
+    "test:debug": "bddgen && PWDEBUG=1 playwright test",
+    "report": "playwright show-report",
+    "typecheck": "tsc -p tsconfig.json",
+    "healing:report": "node -e \"require('./src/core/HealingReporter').printSummary()\"",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results"
+  },
+  "keywords": [
+    "playwright",
+    "bdd",
+    "cucumber",
+    "self-healing",
+    "ai",
+    "page-object-model"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "1.55.0",
+    "@types/node": "^20.19.43",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
+    "playwright-bdd": "8.3.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
