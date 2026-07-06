@@ -147,11 +147,16 @@ class AIHealer {
   _parseSelector(raw) {
     if (!raw) return null;
     const cleaned = raw.replace(/```json|```/gi, '').trim();
-    const match = cleaned.match(/\{[\s\S]*\}/);
-    if (!match) return null;
+
+    // Extract the first top-level `{...}` block by index scanning rather than a
+    // regex. A pattern like /\{[\s\S]*\}/ can backtrack super-linearly on
+    // adversarial input (ReDoS); indexOf/lastIndexOf are O(n) and can't.
+    const start = cleaned.indexOf('{');
+    const end = cleaned.lastIndexOf('}');
+    if (start === -1 || end <= start) return null;
 
     try {
-      const obj = JSON.parse(match[0]);
+      const obj = JSON.parse(cleaned.slice(start, end + 1));
       if (!obj.selector || typeof obj.selector !== 'string') return null;
       const strategy = obj.strategy === 'xpath' ? 'xpath' : 'css';
       return { selector: obj.selector.trim(), strategy };
